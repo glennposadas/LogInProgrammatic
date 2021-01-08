@@ -5,7 +5,9 @@
 //  Created by Mac on 9/23/20.
 //  Copyright © 2020 Eric Park. All rights reserved.
 //
+
 import Firebase
+import FirebaseAuth
 
 class User {
     

@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
 import Firebase
+import FirebaseStorage
 
 class EditProfileController: UIViewController {
     

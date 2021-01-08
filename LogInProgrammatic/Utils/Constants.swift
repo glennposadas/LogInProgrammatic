@@ -8,6 +8,7 @@
 
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 // MARK: - Root References
 

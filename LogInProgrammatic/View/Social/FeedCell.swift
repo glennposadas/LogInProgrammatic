@@ -229,9 +229,8 @@ class FeedCell: UICollectionViewCell {
         let postImageViewSize: CGRect = postImageView.bounds
         let postImageViewWidth = postImageViewSize.width
         let postImageViewHeight = postImageViewSize.height
-        //let maskedView = UIView(frame: CGRect(x: 0, y: 0.5, width: postImageViewWidth, height: postImageViewHeight))
-
-        let maskedView = UIView(frame: CGRect(x: 0, y: 0.5, width: 400, height: 400))
+      
+        let maskedView = UIView(frame: CGRect(x: 0, y: 0.5, width: postImageViewWidth, height: postImageViewHeight))
         maskedView.backgroundColor = .black
 
         let gradientMaskLayer = CAGradientLayer()
@@ -241,14 +240,13 @@ class FeedCell: UICollectionViewCell {
 
         maskedView.layer.mask = gradientMaskLayer
         postImageView.addSubview(maskedView)
-        
     }
     
-//    override func layoutSublayers(of layer: CALayer) {
-//        super.layoutSublayers(of: layer)
-//        let gradientMaskLayer = CAGradientLayer()
-//        gradientMaskLayer.frame = self.bounds
-//    }
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        
+        configureGradientOverlay()
+    }
     
     func configureActionButtons() {
         

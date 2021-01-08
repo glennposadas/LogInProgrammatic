@@ -8,7 +8,8 @@
 
 import UIKit
 import Firebase
-
+import FirebaseAuth
+import FirebaseStorage
 class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let plusPhotoButton: UIButton = {
