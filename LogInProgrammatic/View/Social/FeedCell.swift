@@ -14,7 +14,9 @@ class FeedCell: UICollectionViewCell {
     // MARK: - Properties
     
     var delegate: FeedCellDelegate?
-    
+  
+    private var maskedView: UIView!
+  
     var post: Post? {
         
         didSet {
@@ -224,28 +226,40 @@ class FeedCell: UICollectionViewCell {
         
     }
     
+  
     func configureGradientOverlay() {
         
         let postImageViewSize: CGRect = postImageView.bounds
         let postImageViewWidth = postImageViewSize.width
         let postImageViewHeight = postImageViewSize.height
       
-        let maskedView = UIView(frame: CGRect(x: 0, y: 0.5, width: postImageViewWidth, height: postImageViewHeight))
+        maskedView = UIView()
+//      let maskedView = UIView(frame: CGRect(x: 0, y: 0.5, width: 400, height: 400))
+
         maskedView.backgroundColor = .black
 
-        let gradientMaskLayer = CAGradientLayer()
-        gradientMaskLayer.frame = maskedView.bounds
-        gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.white.cgColor]
-        gradientMaskLayer.locations = [0, 0.4, 0.6, 0.99]
-
-        maskedView.layer.mask = gradientMaskLayer
+      
         postImageView.addSubview(maskedView)
+      
+      maskedView.translatesAutoresizingMaskIntoConstraints = false
+      
+      NSLayoutConstraint.activate([
+        maskedView.heightAnchor.constraint(equalToConstant: 400),
+        maskedView.leadingAnchor.constraint(equalTo: postImageView.leadingAnchor, constant: 0),
+        maskedView.trailingAnchor.constraint(equalTo: postImageView.trailingAnchor, constant: 0),
+        maskedView.bottomAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 0)
+      ])
     }
     
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
         
-        configureGradientOverlay()
+      let gradientMaskLayer = CAGradientLayer()
+              gradientMaskLayer.frame = maskedView.bounds
+              gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.white.cgColor]
+              gradientMaskLayer.locations = [0, 0.4, 0.6, 0.99]
+
+              maskedView.layer.mask = gradientMaskLayer
     }
     
     func configureActionButtons() {
